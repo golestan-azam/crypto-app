@@ -8,7 +8,7 @@ function HomePage(props) {
   const [coins, setCoins] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
-  const [currecy, setCurrency] = useState("usd");
+  const [currency, setCurrency] = useState("usd");
 
   useEffect(() => {
     // fetch(getCoinList())
@@ -16,20 +16,20 @@ function HomePage(props) {
     //   .then((json) => setCoins(json));
 
     setIsLoading(true);
-
+    
     const getData = async () => {
-      const res = await fetch(getCoinList(page, currecy));
+      const res = await fetch(getCoinList(page, currency));
       const json = await res.json();
       setCoins(json);
       setIsLoading(false);
     };
 
     getData();
-  }, [page,currecy]);
+  }, [page,currency]);
 
   return (
     <div>
-      <Search currecy={currecy} setCurrency={setCurrency} />
+      <Search currency={currency} setCurrency={setCurrency} />
       <TableCoin coins={coins} isLoading={isLoading} />
       <Pagination page={page} setPage={setPage} />
     </div>

@@ -1,6 +1,7 @@
 import React from "react";
 
 function Search({ currency, setCurrency }) {
+   
   return (
     <div>
       <input type="text" />
