@@ -4,6 +4,7 @@ import chartUp from "../../assets/chart-up.svg";
 import chartDown from "../../assets/chart-down.svg";
 
 import styles from "./TableCoin.module.css";
+import { marketChart } from "../../services/cryptoApi";
 
 function TableCoin({ coins, isLoading, currency, setChart }) {
   return (
@@ -44,6 +45,7 @@ const TableRow = ({
   setChart,
   currency,
   coin: {
+    id,
     name,
     image,
     symbol,
@@ -52,8 +54,15 @@ const TableRow = ({
     price_change_percentage_24h: price_change,
   },
 }) => {
-  const showHandler = () => {
-    setChart(true);
+  const showHandler = async () => {
+    try {
+      const res = await fetch(marketChart(id));
+      const json = await res.json();
+      console.log(json);
+      setChart(json);
+    } catch (error) {
+      setChart(null);
+    }
   };
   return (
     <tr>
