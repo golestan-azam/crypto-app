@@ -46,7 +46,7 @@ function Search({ currency, setCurrency }) {
   }, [text]);
 
   return (
-    <div className={styles.serachBox}>
+    <div className={styles.searchBox}>
       <input
         type="text"
         placeholder="Search"
