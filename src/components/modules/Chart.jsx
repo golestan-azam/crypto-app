@@ -15,8 +15,8 @@ import { convertData } from "../../helpers/convertData";
 import styles from "./Chart.module.css";
 
 function Chart({ chart, setChart }) {
+  console.log(chart);
   const [type, setType] = useState("prices");
-  console.log(convertData(chart, type));
 
   return (
     <div className={styles.container}>
@@ -24,8 +24,37 @@ function Chart({ chart, setChart }) {
         X
       </span>
       <div className={styles.chart}>
+        <div className={styles.name}>
+          <img src={chart.coin.image} />
+          <p>{chart.coin.name}</p>
+        </div>
         <div className={styles.graph}>
           <ChartComponent data={convertData(chart, type)} type={type} />
+        </div>
+        <div className={styles.types}>
+          <button>Prices</button>
+          <button>Market Caps</button>
+          <button>Total Volumes</button>
+        </div>
+        <div className={styles.details}>
+          <div>
+            <p>Prices:</p>
+            <span>
+              {chart.currency === "usd" ? "$" : chart.currency === "eur" ? "£" : "¥"}
+              {chart.coin.current_price.toLocaleString()}
+            </span>
+          </div>
+          <div>
+            <p>ATH:</p>
+            <span>
+              {chart.currency === "usd" ? "$" : chart.currency === "eur" ? "£" : "¥"}
+              {chart.coin.ath.toLocaleString()}
+            </span>
+          </div>
+          <div>
+            <p>Market Cap:</p>
+            <span>{chart.coin.market_cap}</span>
+          </div>
         </div>
       </div>
     </div>
